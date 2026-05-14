@@ -34,7 +34,7 @@ const defaultDocuments = [
 async function getAllDocuments(): Promise<Document[]> {
   try {
     const ingestedDocuments = await getDocumentsFromSupabase();
-    console.log('获取到的文档数量:', ingestedDocuments.length, ingestedDocuments);
+    // console.log('获取到的文档数量:', ingestedDocuments.length, ingestedDocuments);
     return [...defaultDocuments, ...ingestedDocuments];
   } catch (error) {
     console.error('获取文档时出错:', error);
