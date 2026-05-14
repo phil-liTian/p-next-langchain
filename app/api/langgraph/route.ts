@@ -1,38 +1,12 @@
 import { ChatDeepSeek } from '@langchain/deepseek';
-import { HumanMessage, AIMessage, SystemMessage } from '@langchain/core/messages';
+import { HumanMessage, AIMessage } from '@langchain/core/messages';
 import { NextRequest, NextResponse } from 'next/server';
 
 const model = new ChatDeepSeek({
   model: 'deepseek-chat',
-  temperature: 0.8,
+  temperature: 0.7,
   apiKey: process.env.DEEPSEEK_API_KEY,
 });
-
-// 幽默风趣的系统角色设定
-const systemPrompt = new SystemMessage(`你是一个幽默风趣、才华横溢的技术向导，名叫"phil的私人助理"。
-
-你的性格特点：
-1. 说话风趣幽默，喜欢用梗和俏皮话，但不过分
-2. 对这个项目（Next.js + LangChain + DeepSeek AI）了如指掌
-3. 回答问题时总是带着轻松愉快的语气
-4. 能用简单易懂的方式解释复杂的技术概念
-5. 偶尔会开一些无伤大雅的技术玩笑
-6. 始终保持积极向上、乐于助人的态度
-
-关于这个项目你知道：
-- 这是一个基于 Next.js 14+ 框架，结合 LangChain.js 和 DeepSeek 大语言模型构建的现代化 AI 应用
-- 项目展示了丰富的 AI 功能：聊天、Agent、RAG检索、LangGraph、结构化输出等
-- 使用了 Tailwind CSS + shadcn/ui 作为样式方案
-- 部署推荐使用 京东云部署
-- 项目里有各个功能模块的完整示例代码，供学习参考
-
-当用户问你问题时：
-1. 先用一句幽默的话开场
-2. 清晰准确地回答问题
-3. 如果合适，加一个有趣的比喻或梗
-4. 保持回答简洁明了，不要太长
-
-记住：你就是这个项目的快乐大使，让每个用户都能带着微笑学到东西！现在，开始表演吧！🎭`);
 
 export async function POST(req: NextRequest) {
   try {
@@ -46,20 +20,26 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 在消息列表最前面插入系统提示词
-    const langChainMessages = [systemPrompt];
-    langChainMessages.push(...messages.map((msg: any) => {
-      if (msg.role === 'user') {
-        return new HumanMessage(msg.content);
-      }
-      return new AIMessage(msg.content);
-    }));
-
     if (stream) {
       const encoder = new TextEncoder();
       const stream = new ReadableStream({
         async start(controller) {
           try {
+            const langChainMessages = messages.map((msg: any) => {
+              if (msg.role === 'user') {
+                return new HumanMessage(msg.content);
+              }
+              return new AIMessage(msg.content);
+            });
+
+            const systemMessage = new HumanMessage(
+              '你是一个基于 LangGraph 的智能助手。LangGraph 允许你构建复杂的有状态工作流。' +
+              '请详细回答用户的问题，并解释 LangGraph 如何帮助构建这个工作流。\n\n' +
+              '用户问题：' + (langChainMessages[langChainMessages.length - 1].content as string)
+            );
+            
+            langChainMessages[langChainMessages.length - 1] = systemMessage;
+
             const stream = await model.stream(langChainMessages);
 
             for await (const chunk of stream) {
@@ -84,6 +64,13 @@ export async function POST(req: NextRequest) {
         },
       });
     }
+
+    const langChainMessages = messages.map((msg: any) => {
+      if (msg.role === 'user') {
+        return new HumanMessage(msg.content);
+      }
+      return new AIMessage(msg.content);
+    });
 
     const response = await model.invoke(langChainMessages);
 

@@ -9,7 +9,7 @@ const navItems = [
   { href: '/agents', label: 'Agent', icon: Bot },
   { href: '/retrieval', label: 'RAG', icon: Search },
   { href: '/structured_output', label: '结构化', icon: FileText },
-  { href: '/langgraph', label: 'LangGraph', icon: GitBranch },
+  // { href: '/langgraph', label: 'LangGraph', icon: GitBranch },
 ];
 
 export function Navbar() {

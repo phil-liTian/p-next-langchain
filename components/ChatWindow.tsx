@@ -14,10 +14,14 @@ interface ChatWindowProps {
   initialMessages?: Message[];
   endPoint?: string;
   stream?: boolean;
+  placeholder?: string;
 }
 
-export function ChatWindow({ onSendMessage, initialMessages = [], endPoint = '/api/chat', stream = false }: ChatWindowProps) {
-  const [messages, setMessages] = useState<Message[]>(initialMessages);
+export function ChatWindow({ onSendMessage, initialMessages = [], endPoint = '/api/chat', stream = false, placeholder = "输入消息..." }: ChatWindowProps) {
+  const defaultMessage: Message[] = [
+    { role: 'assistant', content: '👋 你好呀！我是你的 AI 小助手，有什么问题都可以尽管问我哦~ 我会尽力帮你解答哒！✨' }
+  ];
+  const [messages, setMessages] = useState<Message[]>(initialMessages.length > 0 ? initialMessages : defaultMessage);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -97,7 +101,7 @@ export function ChatWindow({ onSendMessage, initialMessages = [], endPoint = '/a
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="输入消息..."
+          placeholder={placeholder}
           className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           disabled={isLoading}
         />

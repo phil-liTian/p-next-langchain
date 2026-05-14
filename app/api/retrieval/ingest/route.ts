@@ -26,7 +26,7 @@ async function parsePdfBuffer(pdfBuffer: Buffer): Promise<string> {
     for (let i = 1; i <= numPages; i++) {
       const page = await pdfDoc.getPage(i);
       const content = await page.getTextContent();
-      const pageText = content.items.map(item => item.str).join(' ');
+      const pageText = content.items.map((item: any) => item.str).join(' ');
       fullText += pageText + '\n';
     }
     return fullText.trim();
