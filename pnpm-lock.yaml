@@ -11,6 +11,9 @@ importers:
       '@huggingface/transformers':
         specifier: ^4.2.0
         version: 4.2.0
+      '@langchain/classic':
+        specifier: ^1.0.32
+        version: 1.0.32(@langchain/core@1.1.46(@opentelemetry/api@1.9.0)(openai@6.37.0(ws@8.20.1)(zod@4.4.3))(ws@8.20.1))(@opentelemetry/api@1.9.0)(openai@6.37.0(ws@8.20.1)(zod@4.4.3))(ws@8.20.1)
       '@langchain/community':
         specifier: ^1.1.28
         version: 1.1.28(@browserbasehq/sdk@2.10.0)(@browserbasehq/stagehand@1.14.0(@playwright/test@1.60.0)(deepmerge@4.3.1)(dotenv@16.4.5)(openai@6.37.0(ws@8.20.1)(zod@4.4.3))(zod@4.4.3))(@huggingface/transformers@4.2.0)(@ibm-cloud/watsonx-ai@1.7.11(typescript@6.0.3))(@langchain/core@1.1.46(@opentelemetry/api@1.9.0)(openai@6.37.0(ws@8.20.1)(zod@4.4.3))(ws@8.20.1))(@opentelemetry/api@1.9.0)(@supabase/supabase-js@2.105.4)(ibm-cloud-sdk-core@5.4.14)(ignore@7.0.5)(jsonwebtoken@9.0.3)(openai@6.37.0(ws@8.20.1)(zod@4.4.3))(pdf-parse@2.4.5)(playwright@1.60.0)(ws@8.20.1)
