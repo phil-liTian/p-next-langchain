@@ -33,7 +33,7 @@ export default function StructuredOutputPage() {
           </div>
 
           <div className="mt-6">
-            <ChatWindow endPoint='/api/structured_output' />
+            <ChatWindow endPoint='/api/structured_output' placeholder='试试问：如何做蛋炒饭' />
           </div>
         </div>
       </div>

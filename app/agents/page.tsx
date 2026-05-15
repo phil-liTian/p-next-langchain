@@ -28,12 +28,12 @@ export default function AgentsPage() {
               <li>自定义工具定义与调用</li>
               <li>多步骤任务规划</li>
               <li>与外部系统集成</li>
-              <li>支持 LangGraph 工作流</li>
+              {/* <li>支持 LangGraph 工作流</li> */}
             </ul>
           </div>
 
           <div className="mt-6">
-            <ChatWindow endPoint='/api/agent' stream={false} />
+            <ChatWindow endPoint='/api/agent' stream={false} placeholder='比如：输入今天周几' />
           </div>
         </div>
       </div>

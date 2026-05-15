@@ -34,7 +34,11 @@ export default function RetrievalPage() {
           <UploadDocumentsForm />
 
           <div className="mt-6">
-            <ChatWindow endPoint='/api/retrieval' stream={false} />
+            <ChatWindow
+              endPoint='/api/retrieval'
+              stream={false}
+              placeholder="试试问：黎田的工作经历是什么？（已支持RAG检索）"
+            />
           </div>
         </div>
       </div>
