@@ -102,6 +102,7 @@ export function ChatWindow({ onSendMessage, initialMessages = [], endPoint = '/a
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={placeholder}
+          style={{width: '100px'}}
           className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
           disabled={isLoading}
         />

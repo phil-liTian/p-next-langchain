@@ -5,7 +5,7 @@ import { UploadDocumentsForm } from '@/components/UploadDocumentsForm';
 
 export default function RetrievalPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50">
+    <main className="min-h-screen bg-gradient-to-b from-white to-gray-50 pb-16">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center mb-8">
